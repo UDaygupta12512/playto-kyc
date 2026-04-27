@@ -38,16 +38,19 @@ Frontend runs at `http://localhost:5173`.
 
 ---
 
-## Demo Credentials (after seed.py)
+## Demo Accounts
 
-| Role     | Username  | Password    | State          |
-|----------|-----------|-------------|----------------|
-| Reviewer | reviewer1 | reviewer123 | —              |
-| Merchant | merchant1 | merchant123 | draft          |
-| Merchant | merchant2 | merchant123 | under_review ⚠ |
-| Merchant | merchant3 | merchant123 | approved       |
+All demo accounts are created using the `seed.py` script. By default, all accounts use the password: `merchant123` (or `reviewer123` for the reviewer).
 
-merchant2's submission is backdated 30h — so it shows as **SLA at_risk** in the dashboard.
+| Role     | Username  | Current State  |
+|----------|-----------|----------------|
+| Reviewer | reviewer1 | [Full Access]  |
+| Merchant | merchant1 | **Draft**      |
+| Merchant | merchant2 | **In Queue** ⚠ |
+| Merchant | merchant3 | **Approved**   |
+
+> [!NOTE]
+> `merchant2` is intentionally backdated to demonstrate the **SLA at_risk** flag in the reviewer dashboard.
 
 ---
 
