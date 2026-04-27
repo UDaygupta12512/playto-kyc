@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: playto-kyc
+    runtime: python
+    rootDir: backend
+    buildCommand: |
+      pip install -r requirements.txt &&
+      cd ../frontend && npm install && npm run build &&
+      mkdir -p ../backend/frontend_dist &&
+      cp -r ../frontend/dist/* ../backend/frontend_dist/ &&
+      cd ../backend &&
+      python manage.py migrate --noinput &&
+      python manage.py collectstatic --noinput &&
+      python seed.py
+    startCommand: gunicorn playto_kyc.wsgi:application --bind 0.0.0.0:$PORT --workers 2
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    disk:
+      name: kyc-data
+      mountPath: /opt/render/project/src/backend
+      sizeGB: 1
